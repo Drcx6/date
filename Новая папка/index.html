@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Date Proposal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('https://www.w3schools.com/w3images/moon.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 4em;
+            animation: textGlow 1.5s infinite alternate;
+            margin-bottom: 30px;
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+            }
+            100% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: buttonsFadeIn 1s ease-in-out;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            background-color: rgba(255, 0, 255, 0.7);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 0, 255, 1);
+        }
+
+        @keyframes buttonsFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Style for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+            color: white;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .popup input {
+            padding: 10px;
+            font-size: 1.2em;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+            color: black;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: #ff00ff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #ff80ff;
+        }
+
+        /* Background overlay for the popup */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 5;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Will you go with me someday for a date?</h1>
+        <div class="buttons-container">
+            <button class="button" id="yesButton">Yes</button>
+            <button class="button">No</button>
+        </div>
+    </div>
+
+    <!-- Overlay background -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <h2>When would you like to go?</h2>
+        <input type="datetime-local" id="dateTimeInput">
+        <br>
+        <button id="submitButton">Submit</button>
+    </div>
+
+    <script>
+        // Get references to the elements
+        const yesButton = document.getElementById('yesButton');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+        const submitButton = document.getElementById('submitButton');
+        const dateTimeInput = document.getElementById('dateTimeInput');
+
+        // Show the popup when "Yes" is clicked
+        yesButton.addEventListener('click', function() {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        // Hide the popup when the form is submitted
+        submitButton.addEventListener('click', function() {
+            const selectedDate = dateTimeInput.value;
+            if (selectedDate) {
+                alert("Thank you! You have selected: " + selectedDate);
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            } else {
+                alert("Please select a date and time.");
+            }
+        });
+
+        // Hide the popup when clicking on the overlay
+        overlay.addEventListener('click', function() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
